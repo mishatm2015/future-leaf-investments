@@ -9,6 +9,9 @@ import Services from "./pages/Services";
 import Partners from "./pages/Partners";
 import Contact from "./pages/Contact";
 import Disclaimer from "./pages/Disclaimer";
+import RegulatoryDisclosures from "./pages/RegulatoryDisclosures";
+import InvestorGrievance from "./pages/InvestorGrievance";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/partners" element={<Partners />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/regulatory-disclosures" element={<RegulatoryDisclosures />} />
+          <Route path="/investor-grievance" element={<InvestorGrievance />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

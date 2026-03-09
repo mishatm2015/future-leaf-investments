@@ -41,7 +41,7 @@ const Navbar = () => {
         </div>
 
         <a
-          href="https://wa.me/918086876692"
+          href="https://wa.me/919400253400"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-shadow hover:shadow-card-hover md:flex"
@@ -71,7 +71,7 @@ const Navbar = () => {
             </Link>
           ))}
           <a
-            href="https://wa.me/918086876692"
+            href="https://wa.me/919400253400"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 block rounded-full bg-primary py-3 text-center text-sm font-semibold text-primary-foreground"

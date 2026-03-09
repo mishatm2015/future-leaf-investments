@@ -13,8 +13,8 @@ const services = [
   },
   {
     icon: Briefcase,
-    title: "Wealth Management",
-    desc: "Personalized financial planning to support your long-term goals such as education, retirement, and wealth creation.",
+    title: "Portfolio Review",
+    desc: "We review your current funds to remove low performers, fix overlap, and ensure your money is working correctly for your goals.",
   },
 ];
 

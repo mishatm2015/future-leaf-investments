@@ -10,22 +10,21 @@ const HeroSection = () => (
           AMFI Registered Mutual Fund Distributor
         </span>
         <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-          Grow Your Wealth.{" "}
-          <span className="text-gradient-leaf">Plan Your Future</span> with Confidence.
+          Plant the seed today. Watch your{" "}
+          <span className="text-gradient-leaf">Future Leaf</span> grow
         </h1>
         <p className="max-w-lg text-lg text-muted-foreground">
-          Guidance for mutual funds, SIPs, and long-term financial planning — helping you make
-          informed decisions for a secure tomorrow.
+          Contact us for a FREE Consultation:
         </p>
         <div className="flex flex-wrap gap-3 pt-2">
           <a
-            href="tel:+918086876692"
+            href="tel:+919400253400"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-shadow hover:shadow-card-hover"
           >
             <Phone size={16} /> Call Now
           </a>
           <a
-            href="https://wa.me/918086876692"
+            href="https://wa.me/919400253400"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-primary bg-card px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-secondary"

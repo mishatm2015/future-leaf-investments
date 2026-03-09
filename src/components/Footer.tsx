@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
@@ -29,20 +30,38 @@ const Footer = () => (
         <div>
           <h4 className="mb-3 text-sm font-semibold">Contact</h4>
           <div className="space-y-1 text-sm text-muted-foreground">
-            <p>Krishnanunni (Founder): 8086876692</p>
-            <p>Shini K J (Operations Head): 9354345823</p>
+            <p>Future Leaf: 9400-253-400</p>
+            <p>Krishnanunni (Founder): 8086-876-692</p>
+            <p>Shini K J (Operations Head): 9354-345-823</p>
             <p>finances.krishnanunni@gmail.com</p>
             <p>finances.shini@gmail.com</p>
+            <a 
+              href="https://www.instagram.com/futureleafinvestments" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 mt-3 hover:text-primary transition-colors"
+            >
+              <Instagram size={16} className="text-pink-500" />
+              <span>@futureleafinvestments</span>
+            </a>
           </div>
         </div>
       </div>
 
       <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
         <p className="mb-2">
-          Mutual fund investments are subject to market risks. Please read all scheme related documents carefully.
+          Future Leaf Investments. AMFI-registered Mutual Fund Distributor ARN: 351966 | ARN Holder: Krishnanunni
         </p>
-        <p>
-          © {new Date().getFullYear()} Future Leaf™ Investments — AMFI Registered Mutual Fund Distributor | ARN-351966
+        <p className="mb-2">
+          Disclaimer: Mutual Fund investments are subject to market risks, read all scheme related documents carefully.
+        </p>
+        <p className="flex flex-wrap items-center justify-center gap-2">
+
+          <Link to="/regulatory-disclosures" className="hover:text-primary underline">Regulatory Disclosures</Link>
+          <span>|</span>
+          <Link to="/investor-grievance" className="hover:text-primary underline">Investor Grievance</Link>
+          <span>|</span>
+          <Link to="/privacy-policy" className="hover:text-primary underline">Privacy Policy & Terms</Link>
         </p>
       </div>
     </div>

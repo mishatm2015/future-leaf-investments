@@ -79,9 +79,9 @@ const Services = () => (
       <div className="container">
         <div className="mb-12 text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">Services</span>
-          <h1 className="mt-2 text-4xl font-bold md:text-5xl">Comprehensive Financial Guidance</h1>
+          <h1 className="mt-2 text-4xl font-bold md:text-5xl">Planting Seeds for Your Future</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            From SIPs to portfolio management, we provide end-to-end mutual fund distribution services.
+            From planting your first SIP to watching your wealth grow, we provide 360-degree support for all your mutual fund needs.
           </p>
         </div>
 

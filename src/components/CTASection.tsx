@@ -9,7 +9,7 @@ const CTASection = () => (
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-4">
         <a
-          href="https://wa.me/918086876692"
+          href="https://wa.me/919400253400"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full bg-card px-6 py-3 text-sm font-semibold text-primary transition-shadow hover:shadow-card-hover"
@@ -17,7 +17,7 @@ const CTASection = () => (
           <MessageCircle size={16} /> Chat on WhatsApp
         </a>
         <a
-          href="tel:+918086876692"
+          href="tel:+919400253400"
           className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
         >
           <Phone size={16} /> Call Now

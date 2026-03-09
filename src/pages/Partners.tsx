@@ -191,7 +191,7 @@ const Partners = () => (
     <main className="py-20">
       <div className="container max-w-6xl">
         <div className="mb-12 text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-primary">Partners</span>
+
           <h1 className="mt-2 text-4xl font-bold md:text-5xl">Our Trusted Partners</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             We collaborate with leading asset management companies to bring you the best investment opportunities.
@@ -217,12 +217,17 @@ const Partners = () => (
           ))}
         </div>
 
-        <div className="mt-12 rounded-xl border border-border bg-card p-8 text-center">
-          <p className="text-muted-foreground">
-            As an AMFI Registered Mutual Fund Distributor (ARN-351966), we work with multiple asset management companies
-            to provide you with a wide range of investment options tailored to your financial goals.
-          </p>
-        </div>
+       {/*
+       <div className="mt-12 rounded-xl border border-border bg-card p-8 text-center">
+         <p className="text-muted-foreground">
+           As an AMFI Registered Mutual Fund Distributor (ARN-351966), we work with multiple asset management companies
+         </p>
+       </div>
+       */}
+
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          All AMC logos, trademarks, and brand names displayed on this page are the property of their respective owners. Their inclusion indicates our empanelment as a distributor and does not imply direct endorsement.
+        </p>
       </div>
     </main>
     <Footer />

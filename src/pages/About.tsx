@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
+import { Instagram } from "lucide-react";
 import advisorImage from "@/assets/advisor-client.jpg";
 import krishnanunniImage from "@/assets/Krishnanunni.png";
 import shiniImage from "@/assets/Shini.png";
@@ -31,6 +32,24 @@ const About = () => (
          </p>
         </div>
 
+        <div className="mt-12 rounded-xl border border-border bg-card p-6">
+          <h3 className="mb-4 text-lg font-semibold">Contact Information</h3>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p><span className="font-semibold text-foreground">Future Leaf:</span> 9400-253-400</p>
+            <p><span className="font-semibold text-foreground">Krishnanunni:</span> 8086-876-692</p>
+            <p><span className="font-semibold text-foreground">Shini:</span> 9354-345-823</p>
+            <a 
+              href="https://www.instagram.com/futureleafinvestments" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 mt-4 hover:text-primary transition-colors"
+            >
+              <Instagram size={16} className="text-pink-500" />
+              <span>@futureleafinvestments</span>
+            </a>
+          </div>
+        </div>
+
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="rounded-xl border border-border bg-card p-6 text-center">
             <div className="flex justify-center mb-4">
@@ -44,7 +63,7 @@ const About = () => (
             <p className="text-sm text-muted-foreground"> ARN-351966</p>
             <p className="text-sm text-primary">Founder</p>
             <p className="mt-2 text-sm text-muted-foreground">finances.krishnanunni@gmail.com</p>
-            <p className="text-sm text-muted-foreground">8086876692</p>
+            <p className="text-sm text-muted-foreground">8086-876-692</p>
           </div>
           <div className="rounded-xl border border-border bg-card p-6 text-center">
             <div className="flex justify-center mb-4">
@@ -57,7 +76,7 @@ const About = () => (
             <h3 className="text-lg font-semibold">Shini K J</h3>
             <p className="text-sm text-primary">Operations Head</p>
             <p className="mt-2 text-sm text-muted-foreground">finances.shini@gmail.com</p>
-            <p className="text-sm text-muted-foreground">9354345823</p>
+            <p className="text-sm text-muted-foreground">9354-345-823</p>
           </div>
         </div>
       </div>
