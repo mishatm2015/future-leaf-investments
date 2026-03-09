@@ -8,7 +8,7 @@ const Footer = () => (
         {/* Brand */}
         <div>
           <img src={logo} alt="Future Leaf Investments" className="mb-3 h-10" />
-          <p className="text-sm text-muted-foreground">Let's Grow Together 🌿</p>
+          <p className="text-sm text-muted-foreground">Grow with us 🌱</p>
           <p className="mt-1 text-xs text-muted-foreground">ARN-351966</p>
         </div>
 

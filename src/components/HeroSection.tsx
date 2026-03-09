@@ -33,7 +33,7 @@ const HeroSection = () => (
             <MessageCircle size={16} /> Chat on WhatsApp
           </a>
         </div>
-        <p className="text-xs text-muted-foreground">ARN-351966 | Let's Grow Together 🌿</p>
+        <p className="text-xs text-muted-foreground">ARN-351966 | Grow with us 🌱</p>
       </div>
 
       {/* Image */}
