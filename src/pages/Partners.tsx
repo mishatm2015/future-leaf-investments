@@ -31,6 +31,9 @@ import hdfcLogo from "@/assets/hdfc-mutual-fund.png";
 import adityaBirlaLogo from "@/assets/aditya-birla-capital-mutual-funds.png";
 import nipponLogo from "@/assets/nippon-india-mutual-fund.png";
 import franklinTempletonLogo from "@/assets/franklin-templeton-investments.png";
+import unionLogo from "@/assets/union-mutual-fund.png";
+import whiteOakLogo from "@/assets/white-oak-capital-asset-management.png";
+import trustLogo from "@/assets/trust-mutual-fund.png";
 
 const partners = [
   {
@@ -183,6 +186,21 @@ const partners = [
     logo: franklinTempletonLogo,
     description: "A global investment management company with decades of experience.",
   },
+  {
+    name: "Union Mutual Fund",
+    logo: unionLogo,
+    description: "A trusted mutual fund house committed to delivering value and growth to investors.",
+  },
+  {
+    name: "White Oak Capital Asset Management",
+    logo: whiteOakLogo,
+    description: "A professional asset management company focused on long-term wealth creation.",
+  },
+  {
+    name: "Trust Mutual Fund",
+    logo: trustLogo,
+    description: "Clear, credible, and consistent mutual fund solutions for investors.",
+  },
 ];
 
 const Partners = () => (
@@ -191,10 +209,10 @@ const Partners = () => (
     <main className="py-20">
       <div className="container max-w-6xl">
         <div className="mb-12 text-center">
-
+          <span className="text-sm font-semibold uppercase tracking-wider text-primary">Partners</span>
           <h1 className="mt-2 text-4xl font-bold md:text-5xl">Our Trusted Partners</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            We collaborate with leading asset management companies to bring you the best investment opportunities.
+            At Future Leaf Investments, we have partnered with India's most trusted fund houses to ensure your portfolio always has the right funds
           </p>
         </div>
 

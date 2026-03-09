@@ -6,9 +6,10 @@ const HeroSection = () => (
     <div className="container grid min-h-[85vh] items-center gap-12 py-16 lg:grid-cols-2">
       {/* Text */}
       <div className="animate-fade-up space-y-6">
-        <span className="inline-block rounded-full border border-primary/20 bg-secondary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-secondary-foreground">
-          AMFI Registered Mutual Fund Distributor
-        </span>
+        <div>
+          <h2 className="text-2xl font-bold md:text-3xl">Future Leaf Investments</h2>
+          <p className="mt-1 text-sm text-muted-foreground">AMFI Registered Mutual Fund Distributor</p>
+        </div>
         <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
           Plant the seed today. Watch your{" "}
           <span className="text-gradient-leaf">Future Leaf</span> grow
