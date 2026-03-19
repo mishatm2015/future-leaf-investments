@@ -37,74 +37,9 @@ import trustLogo from "@/assets/trust-mutual-fund.png";
 
 const partners = [
   {
-    name: "HSBC Asset Management",
-    logo: hsbcLogo,
-    description: "A leading global asset management company offering diverse investment solutions.",
-  },
-  {
-    name: "Kotak Mutual Fund",
-    logo: kotakLogo,
-    description: "One of India's premier mutual fund houses with a strong track record of performance.",
-  },
-  {
-    name: "Helios Mutual Fund",
-    logo: heliosLogo,
-    description: "A trusted mutual fund provider committed to delivering value to investors.",
-  },
-  {
-    name: "PPFAS Mutual Fund",
-    logo: ppfasLogo,
-    description: "Known for their long-term value investing approach and disciplined investment philosophy.",
-  },
-  {
-    name: "Sundaram Mutual",
-    logo: sundaramLogo,
-    description: "Focused on unearthing opportunities and creating wealth for investors.",
-  },
-  {
-    name: "JM Financial Mutual Fund",
-    logo: jmFinancialLogo,
-    description: "A trusted name in financial services with comprehensive mutual fund offerings.",
-  },
-  {
-    name: "PGIM India Mutual Fund",
-    logo: pgimLogo,
-    description: "A global asset management company providing innovative investment solutions.",
-  },
-  {
-    name: "Motilal Oswal",
-    logo: motilalOswalLogo,
-    description: "A leading financial services firm with a focus on wealth creation.",
-  },
-  {
-    name: "360 ONE Asset",
-    logo: asset360Logo,
-    description: "A comprehensive asset management platform offering diverse investment options.",
-  },
-  {
-    name: "DSP Mutual Fund",
-    logo: dspLogo,
-    description: "One of India's oldest and most respected mutual fund houses.",
-  },
-  {
-    name: "Axis Mutual Fund",
-    logo: axisLogo,
-    description: "A leading mutual fund house focused on delivering consistent returns.",
-  },
-  {
-    name: "Invesco Mutual Fund",
-    logo: invescoLogo,
-    description: "A global investment management company with strong expertise in mutual funds.",
-  },
-  {
-    name: "ICICI Prudential Asset Management",
-    logo: iciciPrudentialLogo,
-    description: "One of India's largest asset management companies with a wide range of schemes.",
-  },
-  {
-    name: "Canara Robeco Mutual Fund",
-    logo: canaraRobecoLogo,
-    description: "A joint venture offering innovative mutual fund solutions to investors.",
+    name: "HDFC Mutual Fund",
+    logo: hdfcLogo,
+    description: "One of India's most trusted mutual fund houses with a strong performance track record.",
   },
   {
     name: "SBI Mutual Fund",
@@ -112,19 +47,74 @@ const partners = [
     description: "India's largest mutual fund house, a partner for life in wealth creation.",
   },
   {
-    name: "ITI Mutual Fund",
-    logo: itiLogo,
-    description: "Focused on long-term wealth creation through disciplined investment strategies.",
+    name: "Kotak Mutual Fund",
+    logo: kotakLogo,
+    description: "One of India's premier mutual fund houses with a strong track record of performance.",
   },
   {
-    name: "Bank of India Mutual Fund",
-    logo: bankOfIndiaLogo,
-    description: "A trusted mutual fund provider backed by a strong banking heritage.",
+    name: "TATA Mutual Fund",
+    logo: tataLogo,
+    description: "A trusted name in mutual funds with a legacy of trust and performance.",
   },
   {
-    name: "Quant Mutual Fund",
-    logo: quantLogo,
-    description: "A multi-asset, multi-manager approach to wealth creation.",
+    name: "Nippon India Mutual Fund",
+    logo: nipponLogo,
+    description: "Focused on setting investors free through wealth creation and financial freedom.",
+  },
+  {
+    name: "PPFAS Mutual Fund",
+    logo: ppfasLogo,
+    description: "Known for their long-term value investing approach and disciplined investment philosophy.",
+  },
+  {
+    name: "Axis Mutual Fund",
+    logo: axisLogo,
+    description: "A leading mutual fund house focused on delivering consistent returns.",
+  },
+  {
+    name: "ICICI Prudential Asset Management",
+    logo: iciciPrudentialLogo,
+    description: "One of India's largest asset management companies with a wide range of schemes.",
+  },
+  {
+    name: "Aditya Birla Capital Mutual Funds",
+    logo: adityaBirlaLogo,
+    description: "One of India's largest mutual fund houses with a comprehensive range of schemes.",
+  },
+  {
+    name: "Mirae Asset",
+    logo: miraeLogo,
+    description: "Building on principles to create long-term wealth for investors.",
+  },
+  {
+    name: "Baroda BNP Paribas Mutual Fund",
+    logo: barodaBnppLogo,
+    description: "A joint venture combining global expertise with local market knowledge.",
+  },
+  {
+    name: "Bajaj Mutual Fund",
+    logo: bajajLogo,
+    description: "A trusted mutual fund house with a focus on investor wealth creation.",
+  },
+  {
+    name: "Motilal Oswal",
+    logo: motilalOswalLogo,
+    description: "A leading financial services firm with a focus on wealth creation.",
+  },
+  {
+    name: "Canara Robeco Mutual Fund",
+    logo: canaraRobecoLogo,
+    description: "A joint venture offering innovative mutual fund solutions to investors.",
+  },
+  {
+    name: "HSBC Asset Management",
+    logo: hsbcLogo,
+    description: "A leading global asset management company offering diverse investment solutions.",
+  },
+  {
+    name: "Franklin Templeton Investments",
+    logo: franklinTempletonLogo,
+    description: "A global investment management company with decades of experience.",
   },
   {
     name: "Bandhan Mutual Fund",
@@ -137,54 +127,9 @@ const partners = [
     description: "A joint venture offering comprehensive mutual fund solutions.",
   },
   {
-    name: "Bajaj Mutual Fund",
-    logo: bajajLogo,
-    description: "A trusted mutual fund house with a focus on investor wealth creation.",
-  },
-  {
-    name: "TATA Mutual Fund",
-    logo: tataLogo,
-    description: "A trusted name in mutual funds with a legacy of trust and performance.",
-  },
-  {
-    name: "LIC Mutual Fund",
-    logo: licLogo,
-    description: "Backed by LIC, offering trusted mutual fund solutions to investors.",
-  },
-  {
-    name: "Mirae Asset",
-    logo: miraeLogo,
-    description: "Building on principles to create long-term wealth for investors.",
-  },
-  {
     name: "Edelweiss Mutual Fund",
     logo: edelweissLogo,
     description: "A trusted mutual fund house focused on creating wealth through innovative strategies.",
-  },
-  {
-    name: "Baroda BNP Paribas Mutual Fund",
-    logo: barodaBnppLogo,
-    description: "A joint venture combining global expertise with local market knowledge.",
-  },
-  {
-    name: "HDFC Mutual Fund",
-    logo: hdfcLogo,
-    description: "One of India's most trusted mutual fund houses with a strong performance track record.",
-  },
-  {
-    name: "Aditya Birla Capital Mutual Funds",
-    logo: adityaBirlaLogo,
-    description: "One of India's largest mutual fund houses with a comprehensive range of schemes.",
-  },
-  {
-    name: "Nippon India Mutual Fund",
-    logo: nipponLogo,
-    description: "Focused on setting investors free through wealth creation and financial freedom.",
-  },
-  {
-    name: "Franklin Templeton Investments",
-    logo: franklinTempletonLogo,
-    description: "A global investment management company with decades of experience.",
   },
   {
     name: "Union Mutual Fund",
@@ -197,9 +142,64 @@ const partners = [
     description: "A professional asset management company focused on long-term wealth creation.",
   },
   {
+    name: "DSP Mutual Fund",
+    logo: dspLogo,
+    description: "One of India's oldest and most respected mutual fund houses.",
+  },
+  {
+    name: "PGIM India Mutual Fund",
+    logo: pgimLogo,
+    description: "A global asset management company providing innovative investment solutions.",
+  },
+  {
+    name: "LIC Mutual Fund",
+    logo: licLogo,
+    description: "Backed by LIC, offering trusted mutual fund solutions to investors.",
+  },
+  {
+    name: "Bank of India Mutual Fund",
+    logo: bankOfIndiaLogo,
+    description: "A trusted mutual fund provider backed by a strong banking heritage.",
+  },
+  {
     name: "Trust Mutual Fund",
     logo: trustLogo,
     description: "Clear, credible, and consistent mutual fund solutions for investors.",
+  },
+  {
+    name: "Quant Mutual Fund",
+    logo: quantLogo,
+    description: "A multi-asset, multi-manager approach to wealth creation.",
+  },
+  {
+    name: "ITI Mutual Fund",
+    logo: itiLogo,
+    description: "Focused on long-term wealth creation through disciplined investment strategies.",
+  },
+  {
+    name: "Invesco Mutual Fund",
+    logo: invescoLogo,
+    description: "A global investment management company with strong expertise in mutual funds.",
+  },
+  {
+    name: "360 ONE Asset",
+    logo: asset360Logo,
+    description: "A comprehensive asset management platform offering diverse investment options.",
+  },
+  {
+    name: "JM Financial Mutual Fund",
+    logo: jmFinancialLogo,
+    description: "A trusted name in financial services with comprehensive mutual fund offerings.",
+  },
+  {
+    name: "Sundaram Mutual",
+    logo: sundaramLogo,
+    description: "Focused on unearthing opportunities and creating wealth for investors.",
+  },
+  {
+    name: "Helios Mutual Fund",
+    logo: heliosLogo,
+    description: "A trusted mutual fund provider committed to delivering value to investors.",
   },
 ];
 

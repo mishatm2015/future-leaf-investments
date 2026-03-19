@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { Instagram } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import advisorImage from "@/assets/advisor-client.jpg";
 import krishnanunniImage from "@/assets/Krishnanunni.png";
 import shiniImage from "@/assets/Shini.png";
@@ -56,13 +56,19 @@ const About = () => (
               <img 
                 src={krishnanunniImage} 
                 alt="Krishnanunni" 
-                className="w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-lg"
+                className="w-36 h-36 rounded-full object-cover object-top border-4 border-primary/20 shadow-lg"
               />
             </div>
             <h3 className="text-lg font-semibold">Krishnanunni</h3>
             <p className="text-sm text-muted-foreground"> ARN-351966</p>
             <p className="text-sm text-primary">Founder</p>
-            <p className="mt-2 text-sm text-muted-foreground">finances.krishnanunni@gmail.com</p>
+            <a
+              href="mailto:finances.krishnanunni@gmail.com"
+              className="mt-2 inline-flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Mail size={14} />
+              <span>finances.krishnanunni@gmail.com</span>
+            </a>
             <p className="text-sm text-muted-foreground">8086-876-692</p>
           </div>
           <div className="rounded-xl border border-border bg-card p-6 text-center">
@@ -70,12 +76,18 @@ const About = () => (
               <img 
                 src={shiniImage} 
                 alt="Shini K J" 
-                className="w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-lg"
+                className="w-36 h-36 rounded-full object-cover object-top border-4 border-primary/20 shadow-lg"
               />
             </div>
             <h3 className="text-lg font-semibold">Shini K J</h3>
             <p className="text-sm text-primary">Operations Head</p>
-            <p className="mt-2 text-sm text-muted-foreground">finances.shini@gmail.com</p>
+            <a
+              href="mailto:finances.shini@gmail.com"
+              className="mt-2 inline-flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Mail size={14} />
+              <span>finances.shini@gmail.com</span>
+            </a>
             <p className="text-sm text-muted-foreground">9354-345-823</p>
           </div>
         </div>

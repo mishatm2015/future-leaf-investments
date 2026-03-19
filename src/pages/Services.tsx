@@ -31,12 +31,12 @@ const categories = [
     ],
   },
   {
-    title: "Portfolio Management Services",
+    title: "Mutual Fund Portfolio Management Services",
     subtitle: "The Health",
     items: [
       { icon: BarChart3, name: "Existing Portfolio Review", desc: "Analyzing your current mutual fund holdings to identify underperforming schemes and overlap." },
-      { icon: PieChart, name: "Asset Allocation", desc: "Structuring your portfolio with the right mix of Equity, Debt, and Gold based on your risk appetite." },
-      { icon: Scale, name: "Portfolio Rebalancing", desc: "Periodically adjusting your portfolio to maintain original asset allocation and manage risk." },
+      { icon: PieChart, name: "Asset Allocation", desc: "Structuring your mutual fund portfolio with the right mix of Equity, Debt, and Gold based on your risk appetite." },
+      { icon: Scale, name: "Portfolio Rebalancing", desc: "Periodically adjusting your mutual fund portfolio to maintain original asset allocation and manage risk." },
       { icon: Target, name: "Risk Profiling", desc: "Assessing your ability and willingness to take risks to recommend suitable mutual fund categories." },
     ],
   },

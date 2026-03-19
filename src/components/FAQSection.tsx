@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Is there a consultation fee?",
-    a: "Please contact us to understand the process and applicable charges, if any.",
+    a: "No, our consultations and ongoing mutual fund support are completely free of charge to you. We earn our revenue through trail commissions paid by the Asset Management Companies for the funds we distribute.",
   },
 ];
 

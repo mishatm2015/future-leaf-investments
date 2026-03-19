@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
+import { Mail } from "lucide-react";
 
 const InvestorGrievance = () => (
   <>
@@ -28,8 +29,9 @@ const InvestorGrievance = () => (
                   <strong className="text-foreground">Email:</strong>{" "}
                   <a 
                     href="mailto:finances.krishnanunni@gmail.com" 
-                    className="text-primary hover:underline"
+                    className="inline-flex items-center gap-2 text-primary hover:underline"
                   >
+                    <Mail size={16} />
                     finances.krishnanunni@gmail.com
                   </a>
                 </p>

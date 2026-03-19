@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
@@ -33,8 +33,20 @@ const Footer = () => (
             <p>Future Leaf: 9400-253-400</p>
             <p>Krishnanunni (Founder): 8086-876-692</p>
             <p>Shini K J (Operations Head): 9354-345-823</p>
-            <p>finances.krishnanunni@gmail.com</p>
-            <p>finances.shini@gmail.com</p>
+            <a
+              href="mailto:finances.krishnanunni@gmail.com"
+              className="flex w-fit items-center gap-2 hover:text-primary transition-colors"
+            >
+              <Mail size={14} />
+              <span>finances.krishnanunni@gmail.com</span>
+            </a>
+            <a
+              href="mailto:finances.shini@gmail.com"
+              className="flex w-fit items-center gap-2 hover:text-primary transition-colors"
+            >
+              <Mail size={14} />
+              <span>finances.shini@gmail.com</span>
+            </a>
             <a 
               href="https://www.instagram.com/futureleafinvestments" 
               target="_blank" 

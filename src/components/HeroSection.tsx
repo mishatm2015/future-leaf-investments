@@ -15,7 +15,7 @@ const HeroSection = () => (
           <span className="text-gradient-leaf">Future Leaf</span> grow
         </h1>
         <p className="max-w-lg text-lg text-muted-foreground">
-          Contact us for a FREE Consultation:
+          Contact us for a FREE enquiry
         </p>
         <div className="flex flex-wrap gap-3 pt-2">
           <a
