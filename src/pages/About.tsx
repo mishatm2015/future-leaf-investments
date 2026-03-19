@@ -39,13 +39,13 @@ const About = () => (
             <p><span className="font-semibold text-foreground">Krishnanunni:</span> 8086-876-692</p>
             <p><span className="font-semibold text-foreground">Shini:</span> 9354-345-823</p>
             <a 
-              href="https://www.instagram.com/futureleafinvestments" 
+              href="https://www.instagram.com/futureleaf.investments/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="flex items-center gap-2 mt-4 hover:text-primary transition-colors"
             >
               <Instagram size={16} className="text-pink-500" />
-              <span>@futureleafinvestments</span>
+              <span>@futureleaf.investments</span>
             </a>
           </div>
         </div>

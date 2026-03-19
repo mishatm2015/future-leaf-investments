@@ -48,13 +48,13 @@ const Footer = () => (
               <span>finances.shini@gmail.com</span>
             </a>
             <a 
-              href="https://www.instagram.com/futureleafinvestments" 
+              href="https://www.instagram.com/futureleaf.investments/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="flex items-center gap-2 mt-3 hover:text-primary transition-colors"
             >
               <Instagram size={16} className="text-pink-500" />
-              <span>@futureleafinvestments</span>
+              <span>@futureleaf.investments</span>
             </a>
           </div>
         </div>

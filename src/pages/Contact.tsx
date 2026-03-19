@@ -23,7 +23,7 @@ const Contact = () => (
             <a href="https://wa.me/919400253400" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
               <MessageCircle size={16} /> WhatsApp
             </a>
-            <a href="https://www.instagram.com/futureleafinvestments" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
+            <a href="https://www.instagram.com/futureleaf.investments/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
               <Instagram size={16} className="text-pink-500" /> Instagram
             </a>
           </div>
