@@ -1,5 +1,5 @@
 import { Phone, MessageCircle } from "lucide-react";
-import heroImage from "@/assets/hero-family.jpg";
+import heroImage from "@/assets/home-family-new.png";
 
 const HeroSection = () => (
   <section className="gradient-hero relative overflow-hidden">
@@ -37,12 +37,12 @@ const HeroSection = () => (
       </div>
 
       {/* Image */}
-      <div className="relative hidden lg:block" style={{ animationDelay: "0.2s" }}>
+      <div className="relative" style={{ animationDelay: "0.2s" }}>
         <div className="overflow-hidden rounded-2xl shadow-card-hover">
           <img
             src={heroImage}
             alt="Happy Indian family planning their financial future"
-            className="h-[500px] w-full object-cover"
+            className="h-[300px] w-full object-cover object-center sm:h-[380px] lg:h-[500px]"
             loading="eager"
           />
         </div>

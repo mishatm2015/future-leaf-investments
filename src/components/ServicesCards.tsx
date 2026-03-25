@@ -13,7 +13,7 @@ const services = [
   },
   {
     icon: Briefcase,
-    title: "Portfolio Review",
+    title: "Mutual Fund Portfolio Review",
     desc: "We review your current funds to remove low performers, fix overlap, and ensure your money is working correctly for your goals.",
   },
 ];

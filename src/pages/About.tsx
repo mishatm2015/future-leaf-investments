@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { Instagram, Mail } from "lucide-react";
-import advisorImage from "@/assets/advisor-client.jpg";
+import advisorImage from "@/assets/advisor-meeting-new.png";
 import krishnanunniImage from "@/assets/Krishnanunni.png";
 import shiniImage from "@/assets/Shini.png";
 
@@ -16,7 +16,12 @@ const About = () => (
         <p className="mt-1 text-sm text-muted-foreground">Grow with us 🌱</p>
 
         <div className="mt-10 overflow-hidden rounded-2xl shadow-card">
-          <img src={advisorImage} alt="Our team" className="h-64 w-full object-cover" loading="lazy" />
+          <img
+            src={advisorImage}
+            alt="Future Leaf advisor meeting with clients"
+            className="h-56 w-full object-cover object-center sm:h-64 md:h-72"
+            loading="lazy"
+          />
         </div>
 
         <div className="mt-10 space-y-6 text-muted-foreground leading-relaxed">

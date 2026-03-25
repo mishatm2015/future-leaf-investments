@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import advisorImage from "@/assets/advisor-client.jpg";
+import advisorImage from "@/assets/advisor-meeting-new.png";
 
 const points = [
   "Clear and simple investment guidance",
@@ -15,7 +15,7 @@ const WhyChooseUs = () => (
         <img
           src={advisorImage}
           alt="Financial advisor discussing investment plan with clients"
-          className="h-[400px] w-full object-cover"
+          className="h-[280px] w-full object-cover object-center sm:h-[340px] lg:h-[400px]"
           loading="lazy"
         />
       </div>
