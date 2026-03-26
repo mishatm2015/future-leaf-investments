@@ -12,7 +12,7 @@ const About = () => (
     <main className="py-20">
       <div className="container max-w-4xl">
         <span className="text-sm font-semibold uppercase tracking-wider text-primary">About Us</span>
-        <h1 className="mt-2 text-4xl font-bold md:text-5xl">Future Leaf™ Investments</h1>
+        <h1 className="mt-2 text-4xl font-bold md:text-5xl">Future Leaf Investments™ </h1>
         <p className="mt-1 text-sm text-muted-foreground">Grow with us 🌱</p>
 
         <div className="mt-10 overflow-hidden rounded-2xl shadow-card">
