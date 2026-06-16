@@ -12,6 +12,7 @@ import Disclaimer from "./pages/Disclaimer";
 import RegulatoryDisclosures from "./pages/RegulatoryDisclosures";
 import InvestorGrievance from "./pages/InvestorGrievance";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Calculators from "./pages/Calculators";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/calculators" element={<Calculators />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/regulatory-disclosures" element={<RegulatoryDisclosures />} />
           <Route path="/investor-grievance" element={<InvestorGrievance />} />
