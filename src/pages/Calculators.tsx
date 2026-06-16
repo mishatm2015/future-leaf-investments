@@ -5,7 +5,7 @@ import FloatingButtons from "@/components/FloatingButtons";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import {
   Calculator, TrendingUp, Umbrella, IndianRupee, Percent, Clock,
-  User, ArrowDownToLine, CreditCard, Layers, ArrowUpDown,
+  User, ArrowDownToLine, CreditCard, Layers, ArrowUpDown, ArrowLeft, ArrowRight,
 } from "lucide-react";
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -159,7 +159,8 @@ function SIPCalculator() {
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
 
-  const r = rate / 100 / 12;
+  // effective monthly rate — industry standard for mutual fund SIP
+  const r = Math.pow(1 + rate / 100, 1 / 12) - 1;
   const n = years * 12;
   const totalValue = r === 0 ? monthly * n : monthly * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
   const invested = monthly * n;
@@ -197,7 +198,8 @@ function SWPCalculator() {
   const [rate, setRate] = useState(8);
   const [years, setYears] = useState(10);
 
-  const r = rate / 100 / 12;
+  // effective monthly rate — industry standard for mutual fund SWP
+  const r = Math.pow(1 + rate / 100, 1 / 12) - 1;
   const n = years * 12;
 
   let balance = corpus;
@@ -309,22 +311,23 @@ function StepUpSIPCalculator() {
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
 
-  const r = rate / 100 / 12;
+  // effective monthly rate — industry standard for mutual fund SIP
+  const r = Math.pow(1 + rate / 100, 1 / 12) - 1;
   let balance = 0;
   let totalInvested = 0;
   for (let yr = 0; yr < years; yr++) {
     const sip = monthly * Math.pow(1 + stepup / 100, yr);
     for (let m = 0; m < 12; m++) {
-      balance = balance * (1 + r) + sip;
+      // SIP invested at BEGINNING of month, then earns return for the month
+      balance = (balance + sip) * (1 + r);
       totalInvested += sip;
     }
   }
   const returns = balance - totalInvested;
 
-  // compare with flat SIP (same initial amount, no step-up)
-  const flatR = r;
+  // flat SIP comparison uses same beginning-of-period annuity-due formula
   const flatN = years * 12;
-  const flatValue = flatR === 0 ? monthly * flatN : monthly * ((Math.pow(1 + flatR, flatN) - 1) / flatR) * (1 + flatR);
+  const flatValue = r === 0 ? monthly * flatN : monthly * ((Math.pow(1 + r, flatN) - 1) / r) * (1 + r);
   const extraGain = balance - flatValue;
 
   return (
@@ -372,7 +375,8 @@ function StepUpSWPCalculator() {
   const [rate, setRate] = useState(8);
   const [years, setYears] = useState(10);
 
-  const r = rate / 100 / 12;
+  // effective monthly rate — industry standard for mutual fund SWP
+  const r = Math.pow(1 + rate / 100, 1 / 12) - 1;
   let balance = corpus;
   let totalWithdrawn = 0;
   let monthsLasted = 0;
@@ -435,22 +439,35 @@ function StepUpSWPCalculator() {
 function RetirementCalculator() {
   const [currentAge, setCurrentAge] = useState(30);
   const [retireAge, setRetireAge] = useState(60);
+  const [lifeExpectancy, setLifeExpectancy] = useState(80);
   const [monthlyExpenses, setMonthlyExpenses] = useState(50000);
   const [inflation, setInflation] = useState(6);
   const [returnRate, setReturnRate] = useState(12);
+  const [postReturnRate, setPostReturnRate] = useState(8);
   const [currentSavings, setCurrentSavings] = useState(500000);
 
   const yearsToRetire = Math.max(retireAge - currentAge, 1);
-  const yearsInRetirement = 25;
+  const yearsInRetirement = Math.max(lifeExpectancy - retireAge, 1);
+
+  // Monthly expenses inflation-adjusted to retirement date
   const expensesAtRetirement = monthlyExpenses * Math.pow(1 + inflation / 100, yearsToRetire);
-  const realRate = (returnRate - inflation) / 100;
+
+  // Corpus needed: growing monthly annuity — expenses start at retirment level
+  // and grow with inflation; corpus earns post-retirement return (conservative allocation)
+  const r_ret = Math.pow(1 + postReturnRate / 100, 1 / 12) - 1;
+  const g_m = Math.pow(1 + inflation / 100, 1 / 12) - 1;
+  const n_ret = yearsInRetirement * 12;
   const corpusNeeded =
-    realRate <= 0
-      ? expensesAtRetirement * 12 * yearsInRetirement
-      : (expensesAtRetirement * 12 * (1 - Math.pow(1 + realRate, -yearsInRetirement))) / realRate;
+    r_ret <= g_m
+      ? expensesAtRetirement * n_ret
+      : (expensesAtRetirement * (1 - Math.pow((1 + g_m) / (1 + r_ret), n_ret))) / (r_ret - g_m);
+
+  // Future value of current savings at accumulation return rate
   const fvCurrentSavings = currentSavings * Math.pow(1 + returnRate / 100, yearsToRetire);
   const remainingCorpus = Math.max(corpusNeeded - fvCurrentSavings, 0);
-  const r = returnRate / 100 / 12;
+
+  // Monthly SIP needed — effective monthly rate, beginning-of-period (annuity-due)
+  const r = Math.pow(1 + returnRate / 100, 1 / 12) - 1;
   const sipMonths = yearsToRetire * 12;
   const monthlySIP =
     remainingCorpus <= 0
@@ -466,11 +483,16 @@ function RetirementCalculator() {
       <div className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={Umbrella} title="Retirement Calculator" sub="Plan your retirement corpus" />
         <SliderInput label="Current Age" icon={User} value={currentAge} min={18} max={65} step={1} onChange={(v) => { setCurrentAge(v); if (v >= retireAge) setRetireAge(v + 1); }} suffix=" Yr" />
-        <SliderInput label="Retirement Age" icon={User} value={retireAge} min={Math.min(currentAge + 1, 75)} max={75} step={1} onChange={setRetireAge} suffix=" Yr" />
+        <SliderInput label="Retirement Age" icon={User} value={retireAge} min={Math.min(currentAge + 1, 75)} max={75} step={1} onChange={(v) => { setRetireAge(v); if (v >= lifeExpectancy) setLifeExpectancy(v + 1); }} suffix=" Yr" />
+        <SliderInput label="Life Expectancy" icon={User} value={lifeExpectancy} min={Math.min(retireAge + 1, 95)} max={95} step={1} onChange={setLifeExpectancy} suffix=" Yr" />
         <SliderInput label="Monthly Expenses Today" icon={IndianRupee} value={monthlyExpenses} min={5000} max={500000} step={1000} onChange={setMonthlyExpenses} prefix="₹" />
         <SliderInput label="Expected Inflation Rate" icon={Percent} value={inflation} min={1} max={15} step={0.5} onChange={setInflation} suffix="%" />
-        <SliderInput label="Expected Investment Return" icon={TrendingUp} value={returnRate} min={1} max={20} step={0.5} onChange={setReturnRate} suffix="%" />
+        <SliderInput label="Return During Accumulation" icon={TrendingUp} value={returnRate} min={1} max={20} step={0.5} onChange={setReturnRate} suffix="%" />
+        <SliderInput label="Return During Retirement" icon={TrendingUp} value={postReturnRate} min={1} max={15} step={0.5} onChange={setPostReturnRate} suffix="%" />
         <SliderInput label="Current Savings / Corpus" icon={IndianRupee} value={currentSavings} min={0} max={10000000} step={50000} onChange={setCurrentSavings} prefix="₹" />
+        <div className="rounded-xl bg-secondary/60 p-3 text-xs text-muted-foreground">
+          Post-retirement return is lower because retirees shift to safer funds (e.g. balanced or debt funds).
+        </div>
       </div>
 
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
@@ -497,9 +519,9 @@ function RetirementCalculator() {
           />
         )}
         <HighlightBox
-          label="Assumed retirement duration"
+          label="Post-retirement duration"
           value={`${yearsInRetirement} years`}
-          sub={`Life expectancy till age ${retireAge + yearsInRetirement}`}
+          sub={`Age ${retireAge} to ${lifeExpectancy} — corpus earns ${postReturnRate}% p.a.`}
         />
       </div>
     </div>
@@ -545,17 +567,24 @@ function HighlightBox({ label, value, sub }: { label: string; value: string; sub
 
 type CalcId = "sip" | "stepup-sip" | "swp" | "stepup-swp" | "emi" | "retirement";
 
-const tabs: { id: CalcId; label: string; icon: React.ElementType }[] = [
-  { id: "sip", label: "SIP", icon: TrendingUp },
-  { id: "stepup-sip", label: "Step-up SIP", icon: Layers },
-  { id: "swp", label: "SWP", icon: ArrowDownToLine },
-  { id: "stepup-swp", label: "Step-up SWP", icon: ArrowUpDown },
-  { id: "emi", label: "EMI", icon: CreditCard },
-  { id: "retirement", label: "Retirement", icon: Umbrella },
+const calculators: {
+  id: CalcId;
+  label: string;
+  icon: React.ElementType;
+  desc: string;
+  Component: React.ComponentType;
+}[] = [
+  { id: "sip", label: "SIP Calculator", icon: TrendingUp, desc: "Calculate how much you need to save or how much you will accumulate with your SIP.", Component: SIPCalculator },
+  { id: "stepup-sip", label: "Step-up SIP Calculator", icon: Layers, desc: "Calculate returns when you increase your SIP amount by a fixed percentage every year.", Component: StepUpSIPCalculator },
+  { id: "swp", label: "SWP Calculator", icon: ArrowDownToLine, desc: "Calculate your final amount with a Systematic Withdrawal Plan (SWP).", Component: SWPCalculator },
+  { id: "stepup-swp", label: "Step-up SWP Calculator", icon: ArrowUpDown, desc: "Calculate returns when you increase your withdrawals every year to beat inflation.", Component: StepUpSWPCalculator },
+  { id: "emi", label: "EMI Calculator", icon: CreditCard, desc: "Calculate your monthly loan instalment (EMI) and total interest payable.", Component: EMICalculator },
+  { id: "retirement", label: "Retirement Calculator", icon: Umbrella, desc: "Calculate the corpus you need to retire comfortably and the SIP to get there.", Component: RetirementCalculator },
 ];
 
 const Calculators = () => {
-  const [active, setActive] = useState<CalcId>("sip");
+  const [active, setActive] = useState<CalcId | null>(null);
+  const selected = calculators.find((c) => c.id === active);
 
   return (
     <>
@@ -573,33 +602,40 @@ const Calculators = () => {
             </p>
           </div>
 
-          {/* Tabs — scrollable on mobile */}
-          <div className="mb-8 overflow-x-auto">
-            <div className="flex min-w-max justify-center gap-2 px-2">
-              {tabs.map((tab) => (
+          {!selected ? (
+            /* ─── Card grid (Groww-style landing) ─── */
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {calculators.map((c) => (
                 <button
-                  key={tab.id}
-                  onClick={() => setActive(tab.id)}
-                  className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-all whitespace-nowrap ${
-                    active === tab.id
-                      ? "border-primary bg-primary text-primary-foreground shadow"
-                      : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-primary/40"
-                  }`}
+                  key={c.id}
+                  onClick={() => setActive(c.id)}
+                  className="group flex flex-col rounded-2xl border border-border bg-card p-6 text-left transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover"
                 >
-                  <tab.icon size={14} />
-                  {tab.label}
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <c.icon size={22} />
+                  </div>
+                  <h3 className="mb-1.5 font-bold text-lg">{c.label}</h3>
+                  <p className="flex-1 text-sm text-muted-foreground">{c.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                    Calculate now
+                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                  </span>
                 </button>
               ))}
             </div>
-          </div>
-
-          {/* Active Calculator */}
-          {active === "sip" && <SIPCalculator />}
-          {active === "stepup-sip" && <StepUpSIPCalculator />}
-          {active === "swp" && <SWPCalculator />}
-          {active === "stepup-swp" && <StepUpSWPCalculator />}
-          {active === "emi" && <EMICalculator />}
-          {active === "retirement" && <RetirementCalculator />}
+          ) : (
+            /* ─── Selected calculator ─── */
+            <div>
+              <button
+                onClick={() => setActive(null)}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+              >
+                <ArrowLeft size={15} />
+                All Calculators
+              </button>
+              <selected.Component />
+            </div>
+          )}
 
           {/* Disclaimer */}
           <div className="mt-10 rounded-2xl border border-border bg-secondary/40 px-6 py-4 text-center text-xs text-muted-foreground">
