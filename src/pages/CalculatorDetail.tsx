@@ -144,7 +144,7 @@ function SIPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={TrendingUp} title="SIP Calculator" sub="Systematic Investment Plan" />
-        <SliderInput label="Monthly Investment" icon={IndianRupee} value={monthly} min={500} max={200000} step={500} onChange={setMonthly} prefix="₹" />
+        <SliderInput label="Monthly Investment" icon={IndianRupee} value={monthly} min={500} max={1000000000} step={100000} onChange={setMonthly} prefix="₹" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="Calculates the future value of regular monthly investments using effective monthly compounding." />
@@ -177,7 +177,7 @@ function LumpsumCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={Coins} title="Lumpsum Calculator" sub="One-time investment" />
-        <SliderInput label="Total Investment" icon={IndianRupee} value={investment} min={1000} max={10000000} step={1000} onChange={setInvestment} prefix="₹" />
+        <SliderInput label="Total Investment" icon={IndianRupee} value={investment} min={1000} max={10000000000} step={1000000} onChange={setInvestment} prefix="₹" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="Calculates the future value of a one-time investment using annual compounding: FV = P × (1 + r)ⁿ." />
@@ -225,7 +225,7 @@ function SWPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={ArrowDownToLine} title="SWP Calculator" sub="Systematic Withdrawal Plan" />
-        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000} step={50000} onChange={setCorpus} prefix="₹" />
+        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000000} step={10000000} onChange={setCorpus} prefix="₹" />
         <SliderInput label="Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={200000} step={500} onChange={setWithdrawal} prefix="₹" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={20} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Withdrawal Period" icon={Clock} value={years} min={1} max={30} step={1} onChange={setYears} suffix=" Yr" />
@@ -313,7 +313,7 @@ function StepUpSIPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={Layers} title="Step-up SIP Calculator" sub="Annual increase in SIP amount" />
-        <SliderInput label="Initial Monthly SIP" icon={IndianRupee} value={monthly} min={500} max={200000} step={500} onChange={setMonthly} prefix="₹" />
+        <SliderInput label="Initial Monthly SIP" icon={IndianRupee} value={monthly} min={500} max={1000000000} step={100000} onChange={setMonthly} prefix="₹" />
         <SliderInput label="Annual Step-up Rate" icon={Percent} value={stepup} min={0} max={50} step={1} onChange={setStepup} suffix="%" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
@@ -368,7 +368,7 @@ function StepUpSWPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={ArrowUpDown} title="Step-up SWP Calculator" sub="Annual increase in withdrawal amount" />
-        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000} step={50000} onChange={setCorpus} prefix="₹" />
+        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000000} step={10000000} onChange={setCorpus} prefix="₹" />
         <SliderInput label="Initial Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={200000} step={500} onChange={setWithdrawal} prefix="₹" />
         <SliderInput label="Annual Step-up Rate" icon={Percent} value={stepup} min={0} max={30} step={1} onChange={setStepup} suffix="%" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={20} step={0.5} onChange={setRate} suffix="%" />
@@ -486,7 +486,7 @@ function InflationCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={TrendingDown} title="Inflation Calculator" sub="See how inflation erodes money value" />
-        <SliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1000} max={100000000} step={10000} onChange={setAmount} prefix="₹" />
+        <SliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1000} max={10000000000} step={1000000} onChange={setAmount} prefix="₹" />
         <SliderInput label="Inflation Rate" icon={Percent} value={inflation} min={1} max={20} step={0.5} onChange={setInflation} suffix="%" />
         <SliderInput label="Time Period" icon={Clock} value={years} min={0} max={20} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks

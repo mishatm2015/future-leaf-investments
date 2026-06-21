@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-icon.png";
 
 const Footer = () => (
   <footer className="border-t border-border bg-card py-12">
@@ -8,7 +8,7 @@ const Footer = () => (
       <div className="grid gap-8 md:grid-cols-3">
         {/* Brand */}
         <div>
-          <img src={logo} alt="Future Leaf Investments" className="mb-3 h-10" />
+          <img src={logo} alt="Future Leaf Investments" className="mb-3 h-14 w-14 object-contain" />
           <p className="text-sm text-muted-foreground">Grow with us 🌱</p>
           <p className="mt-1 text-xs text-muted-foreground">ARN-351966</p>
         </div>
