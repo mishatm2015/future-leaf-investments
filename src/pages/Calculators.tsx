@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import {
   Calculator, TrendingUp, Umbrella, ArrowDownToLine,
-  CreditCard, Layers, ArrowUpDown, ArrowRight,
+  CreditCard, Layers, ArrowUpDown, ArrowRight, Coins, TrendingDown,
 } from "lucide-react";
 
 const calculators = [
@@ -13,6 +13,12 @@ const calculators = [
     label: "SIP Calculator",
     icon: TrendingUp,
     desc: "Calculate how much you need to save or how much you will accumulate with your SIP.",
+  },
+  {
+    id: "lumpsum",
+    label: "Lumpsum Calculator",
+    icon: Coins,
+    desc: "Calculate returns on a one-time investment with annual compounding.",
   },
   {
     id: "stepup-sip",
@@ -39,6 +45,12 @@ const calculators = [
     desc: "Calculate your monthly loan instalment (EMI) and total interest payable.",
   },
   {
+    id: "inflation",
+    label: "Inflation Calculator",
+    icon: TrendingDown,
+    desc: "See how inflation reduces your money's value — e.g. ₹1 Cr today may feel like only ₹5 L after years.",
+  },
+  {
     id: "retirement",
     label: "Retirement Calculator",
     icon: Umbrella,
@@ -57,7 +69,7 @@ const Calculators = () => (
           </span>
           <h1 className="mt-3 text-4xl font-bold md:text-5xl">Plan Your Financial Future</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Free, instant calculators for SIP, SWP, EMI, Step-up investments, and retirement planning.
+            Free, instant calculators for SIP, Lumpsum, SWP, EMI, inflation, Step-up investments, and retirement planning.
           </p>
         </div>
 

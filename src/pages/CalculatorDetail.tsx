@@ -6,7 +6,7 @@ import FloatingButtons from "@/components/FloatingButtons";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import {
   TrendingUp, Umbrella, IndianRupee, Percent, Clock,
-  User, ArrowDownToLine, CreditCard, Layers, ArrowUpDown, ArrowLeft,
+  User, ArrowDownToLine, CreditCard, Layers, ArrowUpDown, ArrowLeft, Coins, TrendingDown,
 } from "lucide-react";
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -158,6 +158,39 @@ function SIPCalculator() {
         </div>
         <DonutChart data={[{ name: "Invested", value: Math.round(invested) }, { name: "Returns", value: Math.round(returns) }]} />
         <HighlightBox label="Wealth Gain Ratio" value={`${((returns / invested) * 100).toFixed(1)}%`} sub={`Returns over ${years} yr${years > 1 ? "s" : ""}`} />
+      </div>
+    </div>
+  );
+}
+
+// ─── LUMPSUM CALCULATOR ─────────────────────────────────────────────────────
+
+function LumpsumCalculator() {
+  const [investment, setInvestment] = useState(25000);
+  const [rate, setRate] = useState(12);
+  const [years, setYears] = useState(10);
+
+  const totalValue = investment * Math.pow(1 + rate / 100, years);
+  const returns = totalValue - investment;
+
+  return (
+    <div className="grid gap-8 lg:grid-cols-2">
+      <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <CalcHeader icon={Coins} title="Lumpsum Calculator" sub="One-time investment" />
+        <SliderInput label="Total Investment" icon={IndianRupee} value={investment} min={1000} max={10000000} step={1000} onChange={setInvestment} prefix="₹" />
+        <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
+        <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
+        <HowItWorks text="Calculates the future value of a one-time investment using annual compounding: FV = P × (1 + r)ⁿ." />
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <h3 className="mb-4 font-semibold text-lg">Investment Summary</h3>
+        <div className="mb-4 grid grid-cols-3 gap-3">
+          <StatCard label="Invested Amount" value={formatINR(investment)} />
+          <StatCard label="Est. Returns" value={formatINR(returns)} color="text-[hsl(40,70%,40%)]" />
+          <StatCard label="Total Value" value={formatINR(totalValue)} color="text-primary" />
+        </div>
+        <DonutChart data={[{ name: "Invested Amount", value: Math.round(investment) }, { name: "Est. Returns", value: Math.round(returns) }]} />
+        <HighlightBox label="Wealth Gain Ratio" value={`${((returns / investment) * 100).toFixed(1)}%`} sub={`Returns over ${years} yr${years > 1 ? "s" : ""}`} />
       </div>
     </div>
   );
@@ -436,14 +469,70 @@ function RetirementCalculator() {
   );
 }
 
+// ─── INFLATION CALCULATOR ───────────────────────────────────────────────────
+
+function InflationCalculator() {
+  const [amount, setAmount] = useState(10000000);
+  const [inflation, setInflation] = useState(10);
+  const [years, setYears] = useState(10);
+
+  const factor = Math.pow(1 + inflation / 100, years);
+  const futureCost = amount * factor;
+  const realValue = amount / factor;
+  const valueLost = amount - realValue;
+  const powerLossPct = amount > 0 ? (valueLost / amount) * 100 : 0;
+
+  return (
+    <div className="grid gap-8 lg:grid-cols-2">
+      <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <CalcHeader icon={TrendingDown} title="Inflation Calculator" sub="See how inflation erodes money value" />
+        <SliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1000} max={100000000} step={10000} onChange={setAmount} prefix="₹" />
+        <SliderInput label="Inflation Rate" icon={Percent} value={inflation} min={1} max={20} step={0.5} onChange={setInflation} suffix="%" />
+        <SliderInput label="Time Period" icon={Clock} value={years} min={0} max={20} step={1} onChange={setYears} suffix=" Yr" />
+        <HowItWorks
+          text={`₹${Math.round(amount).toLocaleString("en-IN")} today at ${inflation}% inflation for ${years} year${years === 1 ? "" : "s"} will need ${formatINR(futureCost)} to buy the same things — but will only feel like ${formatINR(realValue)} in today's money.`}
+        />
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <h3 className="mb-4 font-semibold text-lg">Inflation Impact</h3>
+        <div className="mb-4 grid grid-cols-2 gap-3">
+          <StatCard label="Amount Today" value={formatINR(amount)} />
+          <StatCard label="Future Cost (same lifestyle)" value={formatINR(futureCost)} color="text-[hsl(40,70%,40%)]" />
+          <StatCard label="Real Value After Inflation" value={formatINR(realValue)} color="text-primary" />
+          <StatCard label="Purchasing Power Lost" value={formatINR(valueLost)} color="text-destructive" />
+        </div>
+        {years > 0 && valueLost > 0 ? (
+          <DonutChart
+            data={[
+              { name: "Real Value Left", value: Math.round(realValue) },
+              { name: "Value Lost to Inflation", value: Math.round(valueLost) },
+            ]}
+          />
+        ) : (
+          <div className="flex h-[220px] items-center justify-center rounded-xl border border-dashed border-border bg-secondary/30 text-sm text-muted-foreground">
+            Increase years or inflation to see the impact chart.
+          </div>
+        )}
+        <HighlightBox
+          label="Purchasing Power Lost"
+          value={`${powerLossPct.toFixed(1)}%`}
+          sub={`After ${years} yr${years === 1 ? "" : "s"} at ${inflation}% inflation, your money buys ${(100 - powerLossPct).toFixed(1)}% of what it does today`}
+        />
+      </div>
+    </div>
+  );
+}
+
 // ─── REGISTRY ────────────────────────────────────────────────────────────────
 
 const registry: Record<string, { title: string; Component: React.ComponentType }> = {
   sip:          { title: "SIP Calculator",         Component: SIPCalculator },
+  lumpsum:      { title: "Lumpsum Calculator",     Component: LumpsumCalculator },
   "stepup-sip": { title: "Step-up SIP Calculator", Component: StepUpSIPCalculator },
   swp:          { title: "SWP Calculator",         Component: SWPCalculator },
   "stepup-swp": { title: "Step-up SWP Calculator", Component: StepUpSWPCalculator },
   emi:          { title: "EMI Calculator",         Component: EMICalculator },
+  inflation:    { title: "Inflation Calculator",   Component: InflationCalculator },
   retirement:   { title: "Retirement Calculator",  Component: RetirementCalculator },
 };
 
