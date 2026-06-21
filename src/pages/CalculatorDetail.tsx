@@ -488,7 +488,7 @@ function InflationCalculator() {
         <CalcHeader icon={TrendingDown} title="Inflation Calculator" sub="See how inflation erodes money value" />
         <SliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1000} max={10000000000} step={1000000} onChange={setAmount} prefix="₹" />
         <SliderInput label="Inflation Rate" icon={Percent} value={inflation} min={1} max={20} step={0.5} onChange={setInflation} suffix="%" />
-        <SliderInput label="Time Period" icon={Clock} value={years} min={0} max={20} step={1} onChange={setYears} suffix=" Yr" />
+        <SliderInput label="Time Period" icon={Clock} value={years} min={0} max={100} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks
           text={`₹${Math.round(amount).toLocaleString("en-IN")} today at ${inflation}% inflation for ${years} year${years === 1 ? "" : "s"} will need ${formatINR(futureCost)} to buy the same things — but will only feel like ${formatINR(realValue)} in today's money.`}
         />
