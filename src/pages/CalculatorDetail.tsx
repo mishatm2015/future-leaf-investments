@@ -17,6 +17,32 @@ function formatINR(n: number): string {
   return `₹${Math.round(n).toLocaleString("en-IN")}`;
 }
 
+const LOG_SLIDER_STEPS = 1000;
+
+function snapMoneyValue(v: number): number {
+  if (v < 1_000) return Math.round(v / 100) * 100;
+  if (v < 10_000) return Math.round(v / 500) * 500;
+  if (v < 1_00_000) return Math.round(v / 1_000) * 1_000;
+  if (v < 10_00_000) return Math.round(v / 5_000) * 5_000;
+  if (v < 1_00_00_000) return Math.round(v / 25_000) * 25_000;
+  if (v < 1_000_00_00_000) return Math.round(v / 1_00_000) * 1_00_000;
+  return Math.round(v / 10_00_000) * 10_00_000;
+}
+
+function logPosToValue(pos: number, min: number, max: number): number {
+  const safeMin = Math.max(min, 1);
+  const ratio = pos / LOG_SLIDER_STEPS;
+  const raw = safeMin * Math.pow(max / safeMin, ratio);
+  return Math.min(max, Math.max(min, snapMoneyValue(raw)));
+}
+
+function valueToLogPos(value: number, min: number, max: number): number {
+  const safeMin = Math.max(min, 1);
+  const clamped = Math.min(max, Math.max(safeMin, value));
+  if (clamped <= safeMin) return 0;
+  return (LOG_SLIDER_STEPS * Math.log(clamped / safeMin)) / Math.log(max / safeMin);
+}
+
 const BRAND_COLORS = [
   "hsl(145,55%,32%)",
   "hsl(40,70%,50%)",
@@ -56,6 +82,70 @@ function SliderInput({
       <div className="flex justify-between text-xs text-muted-foreground">
         <span>{prefix}{min.toLocaleString("en-IN")}{suffix}</span>
         <span>{prefix}{max.toLocaleString("en-IN")}{suffix}</span>
+      </div>
+    </div>
+  );
+}
+
+function MoneySliderInput({
+  label, icon: Icon, value, min, max, onChange,
+}: {
+  label: string; icon: React.ElementType; value: number;
+  min: number; max: number;
+  onChange: (v: number) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState("");
+  const sliderPos = valueToLogPos(value, min, max);
+
+  const commitDraft = () => {
+    const v = parseFloat(draft);
+    if (!isNaN(v) && draft.trim() !== "") {
+      onChange(Math.min(max, Math.max(min, snapMoneyValue(v))));
+    }
+    setEditing(false);
+  };
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between gap-2">
+        <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+          <Icon size={15} className="text-primary shrink-0" />
+          {label}
+        </label>
+        <input
+          type="text"
+          inputMode="numeric"
+          value={editing ? draft : value.toLocaleString("en-IN")}
+          onFocus={(e) => {
+            setDraft(String(value));
+            setEditing(true);
+            e.target.select();
+          }}
+          onChange={(e) => {
+            const raw = e.target.value.replace(/[^\d]/g, "");
+            setDraft(raw);
+            if (raw === "") return;
+            const v = parseFloat(raw);
+            if (!isNaN(v)) onChange(Math.min(max, v));
+          }}
+          onBlur={commitDraft}
+          onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
+          className="w-28 rounded-lg border border-border bg-secondary px-2 py-1 text-right text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={LOG_SLIDER_STEPS}
+        step={1}
+        value={sliderPos}
+        onChange={(e) => onChange(logPosToValue(parseFloat(e.target.value), min, max))}
+        className="h-2 w-full cursor-pointer appearance-none rounded-full bg-secondary accent-primary"
+      />
+      <div className="flex justify-between text-xs text-muted-foreground">
+        <span>{formatINR(min)}</span>
+        <span>{formatINR(max)}</span>
       </div>
     </div>
   );
@@ -144,7 +234,7 @@ function SIPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={TrendingUp} title="SIP Calculator" sub="Systematic Investment Plan" />
-        <SliderInput label="Monthly Investment" icon={IndianRupee} value={monthly} min={500} max={1000000000} step={100000} onChange={setMonthly} prefix="₹" />
+        <MoneySliderInput label="Monthly Investment" icon={IndianRupee} value={monthly} min={100} max={1_000_00_00_000} onChange={setMonthly} />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="Calculates the future value of regular monthly investments using effective monthly compounding." />
@@ -177,7 +267,7 @@ function LumpsumCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={Coins} title="Lumpsum Calculator" sub="One-time investment" />
-        <SliderInput label="Total Investment" icon={IndianRupee} value={investment} min={1000} max={10000000000} step={1000000} onChange={setInvestment} prefix="₹" />
+        <MoneySliderInput label="Total Investment" icon={IndianRupee} value={investment} min={1_000} max={1_000_00_00_000} onChange={setInvestment} />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="Calculates the future value of a one-time investment using annual compounding: FV = P × (1 + r)ⁿ." />
@@ -225,8 +315,8 @@ function SWPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={ArrowDownToLine} title="SWP Calculator" sub="Systematic Withdrawal Plan" />
-        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000000} step={10000000} onChange={setCorpus} prefix="₹" />
-        <SliderInput label="Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={200000} step={500} onChange={setWithdrawal} prefix="₹" />
+        <MoneySliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={1_00_000} max={1_000_00_00_000} onChange={setCorpus} />
+        <MoneySliderInput label="Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={2_00_000} onChange={setWithdrawal} />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={20} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Withdrawal Period" icon={Clock} value={years} min={1} max={30} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="Each month the corpus earns return first, then the withdrawal is deducted." />
@@ -313,7 +403,7 @@ function StepUpSIPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={Layers} title="Step-up SIP Calculator" sub="Annual increase in SIP amount" />
-        <SliderInput label="Initial Monthly SIP" icon={IndianRupee} value={monthly} min={500} max={1000000000} step={100000} onChange={setMonthly} prefix="₹" />
+        <MoneySliderInput label="Initial Monthly SIP" icon={IndianRupee} value={monthly} min={100} max={1_000_00_00_000} onChange={setMonthly} />
         <SliderInput label="Annual Step-up Rate" icon={Percent} value={stepup} min={0} max={50} step={1} onChange={setStepup} suffix="%" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={30} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Investment Duration" icon={Clock} value={years} min={1} max={40} step={1} onChange={setYears} suffix=" Yr" />
@@ -368,8 +458,8 @@ function StepUpSWPCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={ArrowUpDown} title="Step-up SWP Calculator" sub="Annual increase in withdrawal amount" />
-        <SliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={100000} max={10000000000} step={10000000} onChange={setCorpus} prefix="₹" />
-        <SliderInput label="Initial Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={200000} step={500} onChange={setWithdrawal} prefix="₹" />
+        <MoneySliderInput label="Total Investment (Corpus)" icon={IndianRupee} value={corpus} min={1_00_000} max={1_000_00_00_000} onChange={setCorpus} />
+        <MoneySliderInput label="Initial Monthly Withdrawal" icon={IndianRupee} value={withdrawal} min={500} max={2_00_000} onChange={setWithdrawal} />
         <SliderInput label="Annual Step-up Rate" icon={Percent} value={stepup} min={0} max={30} step={1} onChange={setStepup} suffix="%" />
         <SliderInput label="Expected Annual Return" icon={Percent} value={rate} min={1} max={20} step={0.5} onChange={setRate} suffix="%" />
         <SliderInput label="Withdrawal Period" icon={Clock} value={years} min={1} max={30} step={1} onChange={setYears} suffix=" Yr" />
@@ -486,7 +576,7 @@ function InflationCalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={TrendingDown} title="Inflation Calculator" sub="See how inflation erodes money value" />
-        <SliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1000} max={10000000000} step={1000000} onChange={setAmount} prefix="₹" />
+        <MoneySliderInput label="Amount Today" icon={IndianRupee} value={amount} min={1_000} max={1_000_00_00_000} onChange={setAmount} />
         <SliderInput label="Inflation Rate" icon={Percent} value={inflation} min={1} max={20} step={0.5} onChange={setInflation} suffix="%" />
         <SliderInput label="Time Period" icon={Clock} value={years} min={0} max={100} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks
