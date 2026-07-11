@@ -57,6 +57,18 @@ function SliderInput({
   min: number; max: number; step: number;
   onChange: (v: number) => void; prefix?: string; suffix?: string;
 }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState("");
+
+  const commitDraft = () => {
+    const v = parseFloat(draft);
+    if (!isNaN(v) && draft.trim() !== "") {
+      // Clamp only — do not snap to step so typed values like 8.7 or 650000 stay as entered
+      onChange(Math.min(max, Math.max(min, v)));
+    }
+    setEditing(false);
+  };
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
@@ -67,9 +79,24 @@ function SliderInput({
         <div className="flex items-center gap-1">
           {prefix && <span className="text-sm font-semibold text-primary">{prefix}</span>}
           <input
-            type="number" value={value} min={min} max={max} step={step}
-            onChange={(e) => { const v = parseFloat(e.target.value); if (!isNaN(v) && v >= min && v <= max) onChange(v); }}
-            className="w-24 rounded-lg border border-border bg-secondary px-2 py-1 text-right text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            type="text"
+            inputMode="decimal"
+            value={editing ? draft : String(value)}
+            onFocus={(e) => {
+              setDraft(String(value));
+              setEditing(true);
+              e.target.select();
+            }}
+            onChange={(e) => {
+              const raw = e.target.value.replace(/[^\d.]/g, "");
+              const parts = raw.split(".");
+              const sanitized = parts.length > 2 ? `${parts[0]}.${parts.slice(1).join("")}` : raw;
+              // Keep typing local — do not push partial values to parent (avoids min clamp / slider fights)
+              setDraft(sanitized);
+            }}
+            onBlur={commitDraft}
+            onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
+            className="w-28 rounded-lg border border-border bg-secondary px-2 py-1 text-right text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
           {suffix && <span className="text-sm font-semibold text-muted-foreground">{suffix}</span>}
         </div>
@@ -127,7 +154,8 @@ function MoneySliderInput({
             setDraft(raw);
             if (raw === "") return;
             const v = parseFloat(raw);
-            if (!isNaN(v)) onChange(Math.min(max, v));
+            // Only sync parent when the typed value is already in range
+            if (!isNaN(v) && v >= min && v <= max) onChange(v);
           }}
           onBlur={commitDraft}
           onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
@@ -357,7 +385,7 @@ function EMICalculator() {
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <CalcHeader icon={CreditCard} title="EMI Calculator" sub="Equated Monthly Instalment" />
-        <SliderInput label="Loan Amount" icon={IndianRupee} value={principal} min={50000} max={10000000} step={50000} onChange={setPrincipal} prefix="₹" />
+        <MoneySliderInput label="Loan Amount" icon={IndianRupee} value={principal} min={50_000} max={1_00_00_000} onChange={setPrincipal} />
         <SliderInput label="Annual Interest Rate" icon={Percent} value={rate} min={1} max={30} step={0.1} onChange={setRate} suffix="%" />
         <SliderInput label="Loan Tenure" icon={Clock} value={years} min={1} max={30} step={1} onChange={setYears} suffix=" Yr" />
         <HowItWorks text="EMI = P × r × (1+r)ⁿ / [(1+r)ⁿ - 1] where r is monthly rate and n is total months." />
