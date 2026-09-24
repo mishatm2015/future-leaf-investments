@@ -41,8 +41,6 @@ const About = () => (
           <h3 className="mb-4 text-lg font-semibold">Contact Information</h3>
           <div className="space-y-2 text-sm text-muted-foreground">
             <p><span className="font-semibold text-foreground">Future Leaf:</span> 9400-253-400</p>
-            <p><span className="font-semibold text-foreground">Krishnanunni:</span> 8086-876-692</p>
-            <p><span className="font-semibold text-foreground">Shini:</span> 9354-345-823</p>
             <a 
               href="https://www.instagram.com/futureleaf.investments/" 
               target="_blank" 
@@ -74,7 +72,6 @@ const About = () => (
               <Mail size={14} />
               <span>finances.krishnanunni@gmail.com</span>
             </a>
-            <p className="text-sm text-muted-foreground">8086-876-692</p>
           </div>
           <div className="rounded-xl border border-border bg-card p-6 text-center">
             <div className="flex justify-center mb-4">
@@ -93,7 +90,6 @@ const About = () => (
               <Mail size={14} />
               <span>finances.shini@gmail.com</span>
             </a>
-            <p className="text-sm text-muted-foreground">9354-345-823</p>
           </div>
         </div>
       </div>

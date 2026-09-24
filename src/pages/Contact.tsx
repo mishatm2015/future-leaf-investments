@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { Phone, Mail, MessageCircle, MapPin, Instagram } from "lucide-react";
+import { Phone, Mail, MessageCircle, Instagram } from "lucide-react";
 
 const Contact = () => (
   <>
@@ -36,12 +36,6 @@ const Contact = () => (
              <p className="text-sm text-muted-foreground">ARN-351966</p>
             <p className="text-sm text-primary">Founder</p>
             <div className="mt-6 space-y-4">
-              <a href="tel:+918086876692" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
-                <Phone size={16} /> 8086-876-692
-              </a>
-              <a href="https://wa.me/918086876692" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
-                <MessageCircle size={16} /> WhatsApp
-              </a>
               <a href="mailto:finances.krishnanunni@gmail.com" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
                 <Mail size={16} /> finances.krishnanunni@gmail.com
               </a>
@@ -53,12 +47,6 @@ const Contact = () => (
             <h3 className="text-xl font-semibold">Shini K J</h3>
             <p className="text-sm text-primary">Operations Head</p>
             <div className="mt-6 space-y-4">
-              <a href="tel:+919354345823" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
-                <Phone size={16} /> 9354-345-823
-              </a>
-              <a href="https://wa.me/919354345823" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
-                <MessageCircle size={16} /> WhatsApp
-              </a>
               <a href="mailto:finances.shini@gmail.com" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary">
                 <Mail size={16} /> finances.shini@gmail.com
               </a>

@@ -31,8 +31,6 @@ const Footer = () => (
           <h4 className="mb-3 text-sm font-semibold">Contact</h4>
           <div className="space-y-1 text-sm text-muted-foreground">
             <p>Future Leaf: 9400-253-400</p>
-            <p>Krishnanunni (Founder): 8086-876-692</p>
-            <p>Shini K J (Operations Head): 9354-345-823</p>
             <a
               href="mailto:finances.krishnanunni@gmail.com"
               className="flex w-fit items-center gap-2 hover:text-primary transition-colors"
